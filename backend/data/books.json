@@ -1,0 +1,29 @@
+[
+  {
+    "id": "b1",
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "isbn": "9780132350884",
+    "genre": "Technology",
+    "totalCopies": 3,
+    "availableCopies": 2
+  },
+  {
+    "id": "b2",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "isbn": "9780062315007",
+    "genre": "Fiction",
+    "totalCopies": 4,
+    "availableCopies": 4
+  },
+  {
+    "id": "b3",
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "isbn": "9780553380163",
+    "genre": "Science",
+    "totalCopies": 2,
+    "availableCopies": 2
+  }
+]

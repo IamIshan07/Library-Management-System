@@ -1,0 +1,20 @@
+[
+  {
+    "id": "i1",
+    "bookId": "b1",
+    "memberId": "m1",
+    "issueDate": "2026-07-01",
+    "dueDate": "2026-07-15",
+    "returnDate": null,
+    "status": "issued"
+  },
+  {
+    "id": "i2",
+    "bookId": "b3",
+    "memberId": "m2",
+    "issueDate": "2026-07-05",
+    "dueDate": "2026-07-19",
+    "returnDate": "2026-08-13",
+    "status": "returned"
+  }
+]
