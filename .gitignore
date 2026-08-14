@@ -29,5 +29,4 @@ Thumbs.db
 
 # Optional: uncomment if you don't want your sample data tracked
 # backend/data/*.json
-
-Document.txt
+DEPLOYMENT.md

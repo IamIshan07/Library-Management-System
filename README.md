@@ -35,6 +35,10 @@ library-management-system/
     └── package.json
 ```
 
+## Deploying it live
+
+Want to put this online (e.g. for IBM training submission)? See **[DEPLOYMENT.md](./DEPLOYMENT.md)** — it walks through deploying the backend to Render and the frontend to Netlify or Vercel.
+
 ## How to run it locally
 
 You need [Node.js](https://nodejs.org) (v18+) installed.
@@ -91,3 +95,14 @@ The route files (`books.js`, `members.js`, `issues.js`) are written so only the 
 - Fine calculation for overdue books
 - Pagination for large catalogs
 - Email/SMS reminders before due date
+
+## Suggested project report sections (for your training documentation)
+
+1. Introduction & objective
+2. System requirements (functional/non-functional)
+3. Architecture diagram (React frontend ↔ REST API ↔ JSON/DB)
+4. ER diagram / data model (Book, Member, Issue)
+5. Screenshots of each module
+6. Technologies used
+7. Testing (sample test cases: issue with no copies left, duplicate member email, etc.)
+8. Conclusion & future scope

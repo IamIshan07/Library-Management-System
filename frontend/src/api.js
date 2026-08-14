@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:5000/api";
+// In development, Vite proxies/uses localhost. In production (Netlify/Vercel),
+// set VITE_API_URL to your deployed Render backend URL, e.g.
+// https://stackroom-backend.onrender.com/api
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, {

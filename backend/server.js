@@ -8,7 +8,11 @@ import issuesRouter from "./routes/issues.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+// In production, set CORS_ORIGIN to your deployed frontend URL
+// (e.g. https://stackroom.netlify.app) to restrict access.
+// Left unset, this allows all origins — fine for a training project demo.
+const corsOrigin = process.env.CORS_ORIGIN || "*";
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 
 app.get("/api/health", (req, res) => {
