@@ -1,6 +1,12 @@
-# Stackroom — Library Management System
+# 📚 Stackroom — Library Management System
 
-A full-stack mini project built with **React**, **Express**, and **Node.js**, made for an IBM industrial training submission.
+A full-stack library management system built with **React**, **Express**, and **Node.js**, made for an IBM industrial training submission. Deployed and live — no local setup needed to use it.
+
+🔗 **Live App:** [stackroom07.netlify.app](https://stackroom07.netlify.app/issues)
+🔗 **Backend API:** [stackroom-library-management-system.onrender.com](https://stackroom-library-management-system.onrender.com)
+🔗 **Repository:** [github.com/IamIshan07/Library-Management-System](https://github.com/IamIshan07/Library-Management-System)
+
+> ⏳ **Cold starts:** the backend is on Render's free tier, which spins down after inactivity. The first request after idle time can take 30–60 seconds to wake up — that's expected, not a bug.
 
 ## What it does
 
@@ -11,9 +17,22 @@ A full-stack mini project built with **React**, **Express**, and **Node.js**, ma
 
 ## Tech stack
 
-- **Frontend:** React 18 + React Router, plain CSS (no framework), Vite as the dev server
-- **Backend:** Node.js + Express, REST API
-- **Data storage:** JSON files (`backend/data/*.json`) — no database server needed, so it's easy to run anywhere. (See "Swapping in a real database" below if your mentor wants MySQL/MongoDB instead.)
+| Layer | Technology |
+|---|---|
+| Frontend | React 18 + React Router, plain CSS, Vite |
+| Backend | Node.js + Express, REST API |
+| Data storage | JSON files (`backend/data/*.json`) |
+| Hosting | Frontend on **Netlify**, backend on **Render** |
+
+Data is stored in flat JSON files rather than a database — simple to run and grade, at the cost of production durability (see the note below).
+
+## Architecture
+
+```
+React (Netlify) ──HTTPS──▶ Express API (Render) ──reads/writes──▶ JSON files
+```
+
+The frontend never touches the data files directly — every read/write goes through the Express API, which keeps business rules (like copy-count checks) in one place. The frontend's API base URL is set via an environment variable, pointing at the live Render backend.
 
 ## Folder structure
 
@@ -35,37 +54,9 @@ library-management-system/
     └── package.json
 ```
 
-## Deploying it live
-
-Want to put this online (e.g. for IBM training submission)? See **[DEPLOYMENT.md](./DEPLOYMENT.md)** — it walks through deploying the backend to Render and the frontend to Netlify or Vercel.
-
-## How to run it locally
-
-You need [Node.js](https://nodejs.org) (v18+) installed.
-
-### 1. Start the backend
-
-```bash
-cd backend
-npm install
-npm start
-```
-
-This runs the API at `http://localhost:5000`. Test it's working by visiting `http://localhost:5000/api/health` in a browser.
-
-### 2. Start the frontend (in a new terminal)
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-This opens the app at `http://localhost:5173`.
-
-Keep both terminals running at the same time — the frontend calls the backend for all data.
-
 ## API reference
+
+Base URL: `https://stackroom-library-management-system.onrender.com`
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -80,13 +71,33 @@ Keep both terminals running at the same time — the frontend calls the backend 
 | POST | `/api/issues/issue` | Issue a book `{bookId, memberId}` |
 | POST | `/api/issues/return/:issueId` | Mark a loan as returned |
 
+## Running it for development
+
+The live app is the primary way to use Stackroom — cloning and running it locally is only needed if you want to modify the code. Requires [Node.js](https://nodejs.org) (v18+).
+
+```bash
+# backend
+cd backend
+npm install
+npm start          # http://localhost:5000
+
+# frontend (new terminal)
+cd frontend
+npm install
+npm run dev         # http://localhost:5173
+```
+
+Both need to run at the same time in development. In production, the frontend is built as a static site and points at the Render API instead of `localhost:5000`.
+
 ## Swapping in a real database (optional, for extra marks)
 
-Right now `utils/db.js` just reads/writes JSON files. If you want to demonstrate database skills:
-- Replace it with **MongoDB** (via `mongoose`) — good if you've studied NoSQL
-- Or **MySQL** (via `mysql2`) — good if you've studied SQL/relational DBs
+`utils/db.js` currently just reads/writes JSON files. To demonstrate database skills, swap it for:
+- **MongoDB** (via `mongoose`) — good if you've studied NoSQL
+- **MySQL** (via `mysql2`) — good if you've studied SQL/relational DBs
 
-The route files (`books.js`, `members.js`, `issues.js`) are written so only the data-access lines would need to change — the Express routes and React frontend stay the same.
+The route files (`books.js`, `members.js`, `issues.js`) are written so only the data-access lines would need to change.
+
+> Because the backend persists to JSON files on Render's filesystem, data written in production doesn't survive a redeploy or a free-tier spin-down. Moving to MongoDB/MySQL (e.g. a free Atlas or PlanetScale instance) fixes this.
 
 ## Ideas to extend it further
 
@@ -95,14 +106,3 @@ The route files (`books.js`, `members.js`, `issues.js`) are written so only the 
 - Fine calculation for overdue books
 - Pagination for large catalogs
 - Email/SMS reminders before due date
-
-## Suggested project report sections (for your training documentation)
-
-1. Introduction & objective
-2. System requirements (functional/non-functional)
-3. Architecture diagram (React frontend ↔ REST API ↔ JSON/DB)
-4. ER diagram / data model (Book, Member, Issue)
-5. Screenshots of each module
-6. Technologies used
-7. Testing (sample test cases: issue with no copies left, duplicate member email, etc.)
-8. Conclusion & future scope
