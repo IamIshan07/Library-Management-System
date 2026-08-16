@@ -1,4 +1,4 @@
-# 📚 Stackroom — Library Management System
+# 📚 Stackroom — Library Management System.
 
 A full-stack library management system built with **React**, **Express**, and **Node.js**, made for an IBM industrial training submission. Deployed and live — no local setup needed to use it.
 
