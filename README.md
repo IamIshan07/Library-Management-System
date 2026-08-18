@@ -13,7 +13,7 @@ A full-stack library management system built with **React**, **Express**, and **
 - **Books** — add, view, and remove titles in the catalog; tracks total vs. available copies
 - **Members** — register and remove library members
 - **Issue / Return** — issue an available book to a member (auto-sets a 14-day due date), mark books as returned, and see loan history with overdue flags
-- **Dashboard** — live stats: total titles, copies available, members, active loans, overdue count
+- **Dashboard** — live stats: total titles, copies available, members, active loans, overdue count.
 
 ## Tech stack
 
